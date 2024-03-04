@@ -2,8 +2,7 @@
 """
 Module for BaseModel unittest
 """
-import sys
-import os
+import uuid
 from models.base_model import BaseModel
 import unittest
 from datetime import datetime
@@ -17,10 +16,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test the save() updated_at function
         """
-        self.my_model = BaseModel()
-        original_updated_at = self.my_model.updated_at
-        self.my_model.save()
-        new_updated_at = self.my_model.updated_at
+        my_model = BaseModel()
+        original_updated_at = my_model.updated_at
+        my_model.save()
+        new_updated_at = my_model.updated_at
         self.assertNotEqual(original_updated_at, new_updated_at)
 
     def test_to_dict(self):
