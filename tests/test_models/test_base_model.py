@@ -30,3 +30,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(my_model_dict['created_at'], str)
         self.assertIsInstance(my_model_dict['updated_at'], str)
         self.assertIsInstance(my_model_dict['__class__'], str)
+
+    def test__str__(self):
+        expected_output = "[BaseModel] ({}) {}".format(self.my_model.id, self.my_model.__dict__)
+        self.assertEqual(str(self.my_model), expected_output)
