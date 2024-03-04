@@ -2,23 +2,36 @@
 """
 Module for BaseModel unittest
 """
-import sys
-import os
+import uuid
 from models.base_model import BaseModel
 import unittest
 from datetime import datetime
 
 
 class TestBaseModel(unittest.TestCase):
-    """
-    The the BaseModel class
-    """
-    base_model = BaseModel()
+    def setUp(self):
+        self.my_model = BaseModel()
 
-        # Check if the ID is generated (not None)
-        self.assertIsNotNone(base_model.id)
+    def test_save(self):
+        """
+        Test that save() method updates updated_at attribute
+        """
+        original_updated_at = self.my_model.updated_at
+        self.my_model.save()
+        new_updated_at = self.my_model.updated_at
+        self.assertNotEqual(original_updated_at, new_updated_at)
 
     def test_to_dict(self):
+        my_model_dict = self.my_model.to_dict()
+        expected_output = ['id', 'created_at', 'updated_at', '__class__']
+        for key in expected_output:
+            self.assertIn(key, my_model_dict)
+        self.assertIsInstance(my_model_dict['id'], str)
+        self.assertIsInstance(my_model_dict['created_at'], str)
+        self.assertIsInstance(my_model_dict['updated_at'], str)
+        self.assertIsInstance(my_model_dict['__class__'], str)
+
+     def test_to_dict(self):
         # Create an instance of BaseModel
         base_model = BaseModel()
 
@@ -29,15 +42,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn('id', base_dict)
         self.assertIn('created_at', base_dict)
 
-    def test_save(self):
-        """
-        Test the save updated_at function
-        """
-        first_updated_at = BaseModel().updated_at
-        BaseModel()
-        new_updated_at = BaseModel().updated_at
-        self.assertNotEqual(first_updated_at, new_updated_at)
-
-
-if __name__ == "__main__":
-    unittest.main()
+    def test__str__(self):
+        expected_output = "[BaseModel] ({}) {}".format(self.my_model.id, self.my_model.__dict__)
+        self.assertEqual(str(self.my_model), expected_output)
