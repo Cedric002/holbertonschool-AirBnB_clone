@@ -15,15 +15,17 @@ class TestBaseModel(unittest.TestCase):
     """
     def test_save(self):
         """
-        Test the save updated_at function
+        Test the save() updated_at function
         """
-        my_model = BaseModel()
-        my_model.save()
-        self.assertNotEqual(my_model.created_at, my_model.updated_at)
+        self.my_model = BaseModel()
+        original_updated_at = self.my_model.updated_at
+        self.my_model.save()
+        new_updated_at = self.my_model.updated_at
+        self.assertNotEqual(original_updated_at, new_updated_at)
 
     def test_to_dict(self):
         """
-        Test the to_dict function
+        Test the to_dict() function
         """
         my_model = BaseModel()
         my_model.name = "My First Model"
