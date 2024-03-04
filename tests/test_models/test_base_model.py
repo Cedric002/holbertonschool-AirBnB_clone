@@ -31,17 +31,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(my_model_dict['updated_at'], str)
         self.assertIsInstance(my_model_dict['__class__'], str)
 
-     def test_to_dict(self):
-        # Create an instance of BaseModel
-        base_model = BaseModel()
-
-        # Convert to dictionary
-        base_dict = base_model.to_dict()
-
-        # Check if 'id' and 'created_at' keys are present
-        self.assertIn('id', base_dict)
-        self.assertIn('created_at', base_dict)
-
     def test__str__(self):
         expected_output = "[BaseModel] ({}) {}".format(self.my_model.id, self.my_model.__dict__)
         self.assertEqual(str(self.my_model), expected_output)
