@@ -14,6 +14,10 @@ class TestFileStorage(unittest.TestCase):
 		file_storage = FileStorage()
 		expected_file_storage = 'file.json'
 		self.assertEqual(file_storage._FileStorage__file_path, expected_file_storage)
+	
+	def test_object(self):
+		file_object = FileStorage()
+		self.assertIsInstance(file_object, FileStorage)
 
 if __name__ == "__main__":
     unittest.main()
