@@ -3,9 +3,12 @@
 Module for BaseModel unittest
 """
 import uuid
+import json
 from models.base_model import BaseModel
 import unittest
 from datetime import datetime
+from models import storage
+from models.engine.file_storage import FileStorage
 
 
 class TestBaseModel(unittest.TestCase):
@@ -34,3 +37,12 @@ class TestBaseModel(unittest.TestCase):
     def test__str__(self):
         expected_output = "[BaseModel] ({}) {}".format(self.my_model.id, self.my_model.__dict__)
         self.assertEqual(str(self.my_model), expected_output)
+    
+    def test_save(self):
+        file_storage = FileStorage()
+        new_model = BaseModel()
+        file_storage.new(new_model)
+        file_storage.save()
+        with open('file.json', 'r') as file:
+            recup_file = json.load(file)
+        self.assertIn("BaseModel." + new_model.id, recup_file)
