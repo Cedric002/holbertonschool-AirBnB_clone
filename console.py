@@ -17,9 +17,5 @@ class HBNBCommand(cmd.Cmd):
         """Don't do anything for empty line."""
         pass
 
-    def do_help(self):
-        """Custom help command."""
-        print("This is a custom help message.")
-
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
