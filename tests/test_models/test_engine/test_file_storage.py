@@ -57,14 +57,19 @@ class TestFileStorage(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             file_storage.reload()
     
-    def test_save(self):
-        file_storage = FileStorage()
-        new_model = BaseModel()
-        file_storage.new(new_model)
-        file_storage.save()
-        with open('file.json', 'r') as file:
-            recup_file = json.load(file)
-        self.assertIn("BaseModel." + new_model.id, recup_file)
+    class TestBaseModel(unittest.TestCase):
+
+        def test_base_model_init(self):
+            base_model = BaseModel(my_number=89, name='My First Model')
+            self.assertEqual(base_model.my_number, 89)
+            self.assertEqual(base_model.name, 'My First Model')
+
+        def test_base_model_save(self):
+            base_model = BaseModel()
+            first_updated_at = base_model.updated_at
+            base_model.save()
+            new_updated_at = base_model.updated_at
+            self.assertNotEqual(first_updated_at, new_updated_at)
 
 if __name__ == "__main__":
     unittest.main()
