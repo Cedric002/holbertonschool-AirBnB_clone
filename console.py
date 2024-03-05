@@ -1,14 +1,14 @@
 import cmd
 
 class HBNBCommand(cmd.Cmd):
-    prompt = "(hbnb)"
+    prompt = '(hbnb) '
 
-    def quit(self, arg):
+    def do_quit(self, arg):
         """Quit the program."""
         print("Quitting the program.")
         return True
 
-    def EOF(self, arg):
+    def do_EOF(self, arg):
         """Handle EOF."""
         print("Exiting on EOF.")
         return True
@@ -17,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
         """Don't do anything for empty line."""
         pass
 
-    def help(self):
+    def do_help(self):
         """Custom help command."""
         print("This is a custom help message.")
 
