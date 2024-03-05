@@ -3,6 +3,7 @@
 Module for BaseModel unittest
 """
 import uuid
+import json
 from models.base_model import BaseModel
 import unittest
 from datetime import datetime
@@ -33,8 +34,13 @@ class TestFileStorage(unittest.TestCase):
 		self.assertIn(obj_key, file_storage._FileStorage__objects)
 
 	def test_save(self):
-		pass
-
+		my_model = BaseModel()
+		new_model = my_model.updated_at
+		my_model.save()
+		file_storage = my_model.updated_at
+		self.assertNotEqual(new_model, file_storage)
+		
+			
 	def test_reload(self):
 		pass
 
