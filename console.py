@@ -1,17 +1,17 @@
 import cmd
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb)' # Custom prompt
+    prompt = "(hbnb)"
 
     def quit(self, arg):
         """Quit the program."""
         print("Quitting the program.")
-        return True # Returning True exits the cmdloop
+        return True
 
     def EOF(self, arg):
         """Handle EOF."""
         print("Exiting on EOF.")
-        return True # Returning True exits the cmdloop
+        return True
 
     def emptyline(self):
         """Don't do anything for empty line."""
