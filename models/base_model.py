@@ -5,6 +5,7 @@ Base model for the Airbnb console
 import json
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -16,24 +17,26 @@ class BaseModel:
         """
         Constructor for BaseModel
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
                 if key == '__class__':
                     continue
                 elif key in ['created_at', 'updated_at']:
-                    # Convert string to datetime object
                     setattr(self, key, datetime.fromisoformat(value))
                 else:
                     setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            storage.new(self)
 
     def save(self):
         """
         Update the updated_at instance with current datetime
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """
