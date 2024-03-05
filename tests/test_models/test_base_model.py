@@ -39,10 +39,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(str(self.my_model), expected_output)
     
     def test_save(self):
-        file_storage = FileStorage()
         new_model = BaseModel()
-        file_storage.new(new_model)
-        file_storage.save()
+        new_model.save()
         with open('file.json', 'r') as file:
-            recup_file = json.load(file)
-        self.assertIn("BaseModel." + new_model.id, recup_file)
+            self.assertIn("BaseModel." + new_model.id, file.read())
