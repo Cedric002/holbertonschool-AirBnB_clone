@@ -1,7 +1,7 @@
 import cmd
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb) ' # Custom prompt
+    prompt = '(hbnb)' # Custom prompt
 
     def quit(self, arg):
         """Quit the program."""
