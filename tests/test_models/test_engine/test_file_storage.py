@@ -34,11 +34,13 @@ class TestFileStorage(unittest.TestCase):
 		self.assertIn(obj_key, file_storage._FileStorage__objects)
 
 	def test_save(self):
-		my_model = BaseModel()
-		new_model = my_model.updated_at
-		my_model.save()
-		file_storage = my_model.updated_at
-		self.assertNotEqual(new_model, file_storage)
+		file_storage = FileStorage()
+		new_model = BaseModel()
+		file_storage.new(new_model)
+		file_storage.save()
+		with open('file.json', 'r') as file:
+			recup_file = json.load(file)
+		self.assertIn("BaseModel." + new_model.id, recup_file)
 		
 			
 	def test_reload(self):
