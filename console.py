@@ -8,7 +8,6 @@ from models.engine.file_storage import storage
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
-    storage = Storage()
 
     def do_create(self, arg):
         """Create a new instance of BaseModel, save it and print the id"""
