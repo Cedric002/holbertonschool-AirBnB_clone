@@ -3,7 +3,7 @@
 First Console of AirBnb project
 """
 import cmd
-from models.engine.file_storage import Storage
+from models.engine.file_storage import storage
 
 
 class HBNBCommand(cmd.Cmd):
