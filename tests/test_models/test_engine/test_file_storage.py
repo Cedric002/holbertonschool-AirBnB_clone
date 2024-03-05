@@ -23,6 +23,7 @@ class TestFileStorage(unittest.TestCase):
 		file_storage = FileStorage()
 		all_objects = file_storage.all()
 		self.assertIsInstance(all_objects, dict)
+		self.assertIs(all_objects, file_storage._FileStorage__objects)
 
 	def test_new(self):
 		file_storage = FileStorage()
