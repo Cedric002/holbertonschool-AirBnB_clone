@@ -21,12 +21,16 @@ class BaseModel:
         self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
+<<<<<<< HEAD
                 if key == '__class__':
                     continue
                 elif key in ['created_at', 'updated_at']:
                     # Convert string to datetime object
                     setattr(self, key, datetime.fromisoformat(value))
                 else:
+=======
+                if not __class__:
+>>>>>>> 074636da1117d427cbc48c424da0a3fc5b7793a5
                     setattr(self, key, value)
 
 
