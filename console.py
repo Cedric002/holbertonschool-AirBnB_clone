@@ -16,14 +16,19 @@ class HBNBCommand(cmd.Cmd):
     classes = {"base_model": BaseModel}
 
     def do_create(self, arg):
-        args = arg.split()
-        if len(args) == 0:
-            print("** class name missing **")
-        elif args[0] not in self.classes:
-            print("** class doesn't exist **")
+        """ 
+        Create a new instance of BaseModel
+        """
+        if not arg:
+            print(" class name missing ")
         else:
-            new_instance = self.classes[args[0]]()
-            print(new_instance.id)
+            try :
+                new_instance = eval(arg)()
+            except NameError:
+                print(" class doesn't exist ")
+            else:
+                new_instance.save()
+                print("{}".format(new_instance.id))
 
     def do_show(self, arg):
         args = arg.split()
