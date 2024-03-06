@@ -3,13 +3,14 @@
 New class to serialize instances to a JSON
 """
 import json
+import os
 
 
 class FileStorage:
     """
     File storage class
     """
-    __file_path = "file.json"
+    __file_path =os.path.abspath("file.json")
     __objects = {}
 
     def all(self):
@@ -41,9 +42,25 @@ class FileStorage:
             with open(self.__file_path, 'r') as file:
                 obj_dict = json.load(file)
                 from models.base_model import BaseModel
+                from models.user import User
+                from models.city import City
+                from models.place import Place
+                from models.review import Review
+                from models.state import State
                 for key, value in obj_dict.items():
                     class_name, obj_id = key.split('.')
-                    obj = eval(class_name)(**value)
+                    if class_name == "User":
+                        obj = User(**value)
+                    elif class_name == "City":
+                        obj = City(**value)
+                    elif class_name == 'Place':
+                        obj = Place(**value)
+                    elif class_name == "Review":
+                        obj = Review(**value)
+                    elif class_name == "State":
+                        obj = State(**value)
+                    else:
+                        obj = BaseModel(**value)
                     self.__objects[key] = obj
         except FileNotFoundError:
             pass
