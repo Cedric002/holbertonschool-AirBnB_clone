@@ -31,35 +31,6 @@ class BaseModel:
             self.updated_at = datetime.now()
             storage.new(self)
 
-class Storage:
-    def __init__(self):
-        self.file_path = 'file.json'
-        self.all_classes = {}
-
-    def create(self, class_name):
-        """Create a new instance of the given class"""
-        pass
-
-    def class_exists(self, class_name):
-        """Check if a class exists in the storage"""
-        pass
-
-    def get(self, class_name, id):
-        """Get an instance by class name and id"""
-        pass
-
-    def all(self, class_name=None):
-        """Get all instances of a class or all classes if class_name is None"""
-        pass
-
-    def delete(self, class_name, id):
-        """Delete an instance by class name and id"""
-        pass
-
-    def update(self, class_name, id, **kwargs):
-        """Update an instance's attributes"""
-        pass
-
     def save(self):
         """
         Update the updated_at instance with current datetime
