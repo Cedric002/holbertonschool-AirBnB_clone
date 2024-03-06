@@ -3,11 +3,17 @@
 First Console of AirBnb project
 """
 import cmd
+import json
+import os
 from models import storage
 
+class BaseModel:
+    _file_path = "file.json"
+    _storage = {}
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
+    classes = {"base_model": BaseModel}
 
     def do_create(self, arg):
         args = arg.split()
