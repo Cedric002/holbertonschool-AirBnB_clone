@@ -10,19 +10,58 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def do_create(self, arg):
-        """Create a new instance of BaseModel, save it and print the id"""
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
         else:
-            class_name = args[0]
-            """Assuming you have a way to check if the class exists"""
-            if not self.storage.class_exists(class_name):
-                print("** class doesn't exist **")
-            else:
-                """Create a new instance and save it"""
-                instance = self.storage.create(class_name)
-                print(f"{instance.id}")
+            new_instance = self.classes[args[0]]()
+            print(new_instance.id)
+
+    def do_show(self, arg):
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        else:
+            print("** no instance found **")
+
+    def do_destroy(self, arg):
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        else:
+            print("** no instance found **")
+
+    def do_all(self, arg):
+        args = arg.split()
+        if len(args) > 0 and args[0] not in self.classes:
+            print("** class doesn't exist **")
+        else:
+            print("[]")
+
+    def do_update(self, arg):
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
+        else:
+            print("** no instance found **")
 
     def do_quit(self, arg):
         """Quit command to exit the program
