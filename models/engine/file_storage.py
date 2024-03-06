@@ -43,10 +43,22 @@ class FileStorage:
                 obj_dict = json.load(file)
                 from models.base_model import BaseModel
                 from models.user import User
+                from models.city import City
+                from models.place import Place
+                from models.review import Review
+                from models.state import State
                 for key, value in obj_dict.items():
                     class_name, obj_id = key.split('.')
                     if class_name == "User":
                         obj = User(**value)
+                    elif class_name == "City":
+                        obj = City(**value)
+                    elif class_name == 'Place':
+                        obj = Place(**value)
+                    elif class_name == "Review":
+                        obj = Review(**value)
+                    elif class_name == "State":
+                        obj = State(**value)
                     else:
                         obj = BaseModel(**value)
                     self.__objects[key] = obj

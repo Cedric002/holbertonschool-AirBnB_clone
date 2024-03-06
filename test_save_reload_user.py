@@ -2,6 +2,7 @@
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
+from models.city import City
 
 all_objs = storage.all()
 print("-- Reloaded objects --")
@@ -19,9 +20,7 @@ my_user.save()
 print(my_user)
 
 print("-- Create a new User 2 --")
-my_user2 = User()
-my_user2.first_name = "John"
-my_user2.email = "airbnb2@mail.com"
-my_user2.password = "root"
+my_user2 = City()
+my_user2.state_id = "John"
 my_user2.save()
 print(my_user2)
