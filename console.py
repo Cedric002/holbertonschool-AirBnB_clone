@@ -96,18 +96,25 @@ class HBNBCommand(cmd.Cmd):
         Print all string representation of all instances
         """
 
-    def do_update(self, arg):
-        """
-        Update instances
-        """
-        args = arg.split()
-        if not args:
+    def do_update(self, line):
+        """Update instance"""
+        args = line.split()
+        if len(args) < 4:
+            print("Incorrect number of arguments.")
+            return
+
+        class_name, id, attr_name, attr_value = args[0],
+        args[1], args[2], args[3]
+
+        if not class_name:
             print("** class name missing **")
             return
-        if args[0] not in HBNBCommand.list_module:
+
+        if class_name not in self.instances:
             print("** class doesn't exist **")
             return
-        if len(args) < 2:
+
+        if not id:
             print("** instance id missing **")
             return
 
