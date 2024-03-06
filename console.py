@@ -100,6 +100,16 @@ class HBNBCommand(cmd.Cmd):
         """
         Update instances
         """
+        args = arg.split()
+        if not args:
+            print("** class name missing **")
+            return
+        if args[0] not in HBNBCommand.list_module:
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
