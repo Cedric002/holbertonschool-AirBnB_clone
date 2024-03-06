@@ -3,13 +3,14 @@
 New class to serialize instances to a JSON
 """
 import json
+import os
 
 
 class FileStorage:
     """
     File storage class
     """
-    __file_path = "file.json"
+    __file_path =os.path.abspath("file.json")
     __objects = {}
 
     def all(self):
