@@ -6,6 +6,7 @@ import cmd
 from models import storage
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models import storage, State, City, Amenity, Place, Review
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -117,6 +118,67 @@ class HBNBCommand(cmd.Cmd):
         if not id:
             print("** instance id missing **")
             return
+        
+    def create_state():
+        name = input("Enter state name: ")
+        state = State(name=name)
+        storage.new(state)
+        state.save()
+    
+    def show_states():
+        states = storage.all().values()
+        for state in states:
+            if isinstance(state, State):
+                print(state)
+
+    def create_city():
+        name = input("Enter city name: ")
+        state_id = input("Enter state ID: ")
+        city = City(name=name, state_id=state_id)
+        storage.new(city)
+        city.save()
+
+    def show_cities():
+        cities = storage.all(City).values()
+        for city in cities:
+            print(city)
+    
+    def create_amenity():
+        description = input("Enter amenity description: ")
+        amenity = Amenity(description=description)
+        storage.new(amenity)
+        amenity.save()
+
+    def show_amenities():
+        amenities = storage.all(Amenity).values()
+        for amenity in amenities:
+            print(amenity)
+
+    def create_place():
+        name = input("Enter place name: ")
+        city_id = input("Enter city ID: ")
+        user_id = input("Enter user ID: ")
+        place = Place(name=name, city_id=city_id, user_id=user_id)
+        storage.new(place)
+        place.save()
+
+    def show_places():
+        places = storage.all(Place).values()
+        for place in places:
+            print(place)
+
+    def create_review():
+        text = input("Enter review text: ")
+        user_id = input("Enter user ID: ")
+        place_id = input("Enter place ID: ")
+        review = Review(text=text, user_id=user_id, place_id=place_id)
+        storage.new(review)
+        review.save()
+
+    def show_reviews():
+        reviews = storage.all(Review).values()
+        for review in reviews:
+            print(review)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
