@@ -11,16 +11,17 @@ from datetime import datetime
 from models import storage
 from models.engine.file_storage import FileStorage
 
+
 class TestFileStorage(unittest.TestCase):
     def test_path(self):
         file_storage = FileStorage()
-        expected_file_storage = os.path.abspath("file.json")
-        self.assertEqual(file_storage._FileStorage__file_path, expected_file_storage)
-    
+        expected_file = os.path.abspath("file.json")
+        self.assertEqual(file_storage._FileStorage__file_path, expected_file)
+
     def test_object(self):
         file_object = FileStorage()
         self.assertIsInstance(file_object._FileStorage__objects, dict)
-    
+
     def test_all(self):
         file_storage = FileStorage()
         all_objects = file_storage.all()
@@ -42,8 +43,7 @@ class TestFileStorage(unittest.TestCase):
         with open('file.json', 'r') as file:
             recup_file = json.load(file)
         self.assertIn("BaseModel." + new_model.id, recup_file)
-        
-            
+
     def test_reload(self):
         file_storage = FileStorage()
         file_storage1 = FileStorage()
@@ -56,7 +56,8 @@ class TestFileStorage(unittest.TestCase):
         obj_key = "BaseModel." + base_model.id
         self.assertIn(obj_key, file_storage2._FileStorage__objects)
         with self.assertRaises(FileNotFoundError):
-            raise(FileNotFoundError)
+            raise (FileNotFoundError)
+
 
 if __name__ == "__main__":
     unittest.main()
