@@ -7,6 +7,11 @@ from models import storage
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 
 
 class HBNBCommand(cmd.Cmd):
@@ -35,10 +40,12 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
         else:
+            class_name = arg
             try:
-                new_instance = eval(arg)()
+                new_instance = eval(class_name)()
             except NameError:
                 print("** class doesn't exist **")
+                return
             else:
                 new_instance.save()
                 print("{}".format(new_instance.id))
