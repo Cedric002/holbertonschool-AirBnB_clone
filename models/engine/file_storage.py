@@ -10,7 +10,7 @@ class FileStorage:
     """
     File storage class
     """
-    __file_path = os.path.abspath("file.json")
+    __file_path =os.path.abspath("file.json")
     __objects = {}
 
     def all(self):
@@ -51,13 +51,13 @@ class FileStorage:
                     class_name, obj_id = key.split('.')
                     if class_name == "User":
                         obj = User(**value)
-                    if class_name == "City":
+                    elif class_name == "City":
                         obj = City(**value)
-                    if class_name == "Place":
+                    elif class_name == "Place":
                         obj = Place(**value)
-                    if class_name == "Review":
+                    elif class_name == "Review":
                         obj = Review(**value)
-                    if class_name == "State":
+                    elif class_name == "State":
                         obj = State(**value)
                     else:
                         obj = BaseModel(**value)

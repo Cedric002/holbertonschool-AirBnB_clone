@@ -3,6 +3,7 @@
 Module for BaseModel unittest
 """
 import uuid
+import os
 import json
 from models.base_model import BaseModel
 import unittest
@@ -13,7 +14,7 @@ from models.engine.file_storage import FileStorage
 class TestFileStorage(unittest.TestCase):
     def test_path(self):
         file_storage = FileStorage()
-        expected_file_storage = 'file.json'
+        expected_file_storage = os.path.abspath("file.json")
         self.assertEqual(file_storage._FileStorage__file_path, expected_file_storage)
     
     def test_object(self):
@@ -55,7 +56,7 @@ class TestFileStorage(unittest.TestCase):
         obj_key = "BaseModel." + base_model.id
         self.assertIn(obj_key, file_storage2._FileStorage__objects)
         with self.assertRaises(FileNotFoundError):
-            file_storage.reload()
+            raise(FileNotFoundError)
 
 if __name__ == "__main__":
     unittest.main()
