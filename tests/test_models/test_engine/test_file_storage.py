@@ -45,18 +45,20 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn("BaseModel." + new_model.id, recup_file)
 
     def test_reload(self):
-        file_storage = FileStorage()
-        file_storage1 = FileStorage()
-        base_model = BaseModel()
-        file_storage1.new(base_model)
-        file_storage1.save()
+        file_storage_1 = FileStorage()
+        new_mod_1 = BaseModel()
 
-        file_storage2 = FileStorage()
-        file_storage2.reload()
-        obj_key = "BaseModel." + base_model.id
-        self.assertIn(obj_key, file_storage2._FileStorage__objects)
-        with self.assertRaises(FileNotFoundError):
-            raise (FileNotFoundError)
+        file_storage_1.new(new_mod_1)
+        file_storage_1.save()
+        file_storage_1.reload()
+
+        with open("file.json", 'r') as file:
+            self.assertIn("BaseModel." + new_mod_1.id, json.load(file))
+
+        file_storage_1.save()
+        file_storage_1._FileStorage__objects = {}
+        file_storage_1.reload()
+        self.assertNotEqual(file_storage_1.all(), {})
 
 
 if __name__ == "__main__":
