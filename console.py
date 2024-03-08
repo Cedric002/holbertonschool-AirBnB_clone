@@ -6,7 +6,17 @@ import cmd
 from models import storage
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+<<<<<<< HEAD
 from models import storage, State, City, Amenity, Place, Review
+=======
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+
+>>>>>>> main
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -34,10 +44,17 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
         else:
+<<<<<<< HEAD
             try :
                 new_instance = eval(arg)()
+=======
+            class_name = arg
+            try:
+                new_instance = eval(class_name)()
+>>>>>>> main
             except NameError:
                 print("** class doesn't exist **")
+                return
             else:
                 new_instance.save()
                 print("{}".format(new_instance.id))

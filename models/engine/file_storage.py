@@ -10,7 +10,7 @@ class FileStorage:
     """
     File storage class
     """
-    __file_path =os.path.abspath("file.json")
+    __file_path = os.path.abspath("file.json")
     __objects = {}
 
     def all(self):
@@ -53,7 +53,7 @@ class FileStorage:
                         obj = User(**value)
                     elif class_name == "City":
                         obj = City(**value)
-                    elif class_name == 'Place':
+                    elif class_name == "Place":
                         obj = Place(**value)
                     elif class_name == "Review":
                         obj = Review(**value)
