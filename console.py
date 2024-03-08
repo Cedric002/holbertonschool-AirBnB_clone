@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """
+        """ 
         Create a new instance of BaseModel
         """
         if not arg:
@@ -51,9 +51,7 @@ class HBNBCommand(cmd.Cmd):
                 print("{}".format(new_instance.id))
 
     def do_show(self, arg):
-        """
-        Prints the string repr of an instance
-        """
+        """Prints the string repr of an instance"""
         args = arg.split()
         if not args:
             print("** class name missing **")
@@ -82,89 +80,113 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print("** class name missing **")
+        if NameError:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
         else:
             class_name = args[0]
-            try:
-                class_instance = eval(class_name)
-            except NameError:
-                print("** class doesn't exist **")
-                return
-            if len(args) == 1:
-                print("** instance id missing **")
-            else:
-                class_id = args[1]
+            class_id = args[1]
+            class_instances = storage.all().get(class_name)
+            if class_instances is not None:
                 key = "{}.{}".format(class_name, class_id)
-                class_instances = storage._FileStorage__objects.get(key)
-                if class_instances:
-                    del storage._FileStorage__objects[key]
+                instance = class_instances.get(key)
+                if instance:
+                    del class_instances[key]
                     storage.save()
                 else:
                     print("** no instance found **")
+            else:
+                print("** class doesn't exist **")
+
 
     def do_all(self, arg):
         """
         Print all string representation of all instances
         """
-        args = arg.split()
-        if len(args) == 1:
-            class_name = args[0]
-            try:
-                class_instance = eval(class_name)
-            except NameError:
-                print("** class doesn't exist **")
-                return
-            instances = storage.all().values()
-            filtered_instances = [str(instance) for instance in instances
-                                  if isinstance(instance, class_instance)]
-            if filtered_instances:
-                print(filtered_instances)
-            else:
-                print("** no instance found **")
-        else:
-            instances = storage.all().values()
-            print([str(instance) for instance in instances])
 
-    def do_update(self, arg):
-        """
-        Update instances
-        """
-        args = arg.split()
-        if not args:
+    def do_update(self, line):
+        """Update instance"""
+        args = line.split()
+        if len(args) < 4:
+            print("Incorrect number of arguments.")
+            return
+
+        class_name, id, attr_name, attr_value = args[0],
+        args[1], args[2], args[3]
+
+        if not class_name:
             print("** class name missing **")
             return
-        class_name = args[0]
-        try:
-            class_instance = eval(class_name)
-        except NameError:
+
+        if class_name not in self.instances:
             print("** class doesn't exist **")
             return
-        if len(args) < 2:
+
+        if not id:
             print("** instance id missing **")
             return
-        else:
-            class_id = args[1]
-            key = "{}.{}".format(class_name, class_id)
-            instance = storage._FileStorage__objects.get(key)
-            if instance is None:
-                print("** no instance found **")
-                return
-            if len(args) < 3:
-                print("** attribute name missing **")
-                return
-            if len(args) < 4:
-                print("** value missing **")
-                return
-            attr_name = args[2]
-            attr_value = args[3]
-            if attr_name in ["id", "created_at", "updated_at"]:
-                return
-            try:
-                attr_value = eval(attr_value)
-            except (NameError,  SyntaxError):
-                pass
-            setattr(instance, attr_name, attr_value)
-            instance.save()
+        
+    def create_state():
+        name = input("Enter state name: ")
+        state = State(name=name)
+        storage.new(state)
+        state.save()
+    
+    def show_states():
+        states = storage.all().values()
+        for state in states:
+            if isinstance(state, State):
+                print(state)
 
+    def create_city():
+        name = input("Enter city name: ")
+        state_id = input("Enter state ID: ")
+        city = City(name=name, state_id=state_id)
+        storage.new(city)
+        city.save()
+
+    def show_cities():
+        cities = storage.all(City).values()
+        for city in cities:
+            print(city)
+    
+    def create_amenity():
+        description = input("Enter amenity description: ")
+        amenity = Amenity(description=description)
+        storage.new(amenity)
+        amenity.save()
+
+    def show_amenities():
+        amenities = storage.all(Amenity).values()
+        for amenity in amenities:
+            print(amenity)
+
+    def create_place():
+        name = input("Enter place name: ")
+        city_id = input("Enter city ID: ")
+        user_id = input("Enter user ID: ")
+        place = Place(name=name, city_id=city_id, user_id=user_id)
+        storage.new(place)
+        place.save()
+
+    def show_places():
+        places = storage.all(Place).values()
+        for place in places:
+            print(place)
+
+    def create_review():
+        text = input("Enter review text: ")
+        user_id = input("Enter user ID: ")
+        place_id = input("Enter place ID: ")
+        review = Review(text=text, user_id=user_id, place_id=place_id)
+        storage.new(review)
+        review.save()
+
+    def show_reviews():
+        reviews = storage.all(Review).values()
+        for review in reviews:
+            print(review)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
