@@ -106,7 +106,29 @@ class HBNBCommand(cmd.Cmd):
         Print all string representation of all instances
         """
         args = arg.split()
-        if len(args) == 1:
+        if not args:
+            print("** class name missing **")
+        else:
+            class_name = args[0]
+            try:
+                class_instance = eval(class_name)
+            except NameError:
+                print("** class doesn't exist **")
+                return
+
+            # Check if the class has an 'all' method
+            if not hasattr(class_instance, 'all') or not callable(getattr(class_instance, 'all')):
+                print("** {} doesn't have an 'all()' method **".format(class_name))
+                return
+
+            # Call the 'all' method of the class
+            instances = class_instance.all()
+        
+            # Print the string representation of instances
+            print([str(instance) for instance in instances])
+
+        if len(arg) == 1:
+
             class_name = args[0]
             try:
                 class_instance = eval(class_name)
