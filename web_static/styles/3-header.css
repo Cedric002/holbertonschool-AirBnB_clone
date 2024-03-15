@@ -9,8 +9,9 @@ header
     padding-left: 20px;
 }
 
-.logo-container
+.logo
 {
-    display: flex;
-    align-items: center;
+    background-image: url("/web_static/images/logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
