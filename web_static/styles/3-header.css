@@ -1,0 +1,16 @@
+header
+{
+    background-color: white;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.logo-container
+{
+    display: flex;
+    align-items: center;
+}
