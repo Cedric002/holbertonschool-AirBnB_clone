@@ -1,4 +1,4 @@
-# AirBnB clone - The console
+# Holberton School AirBnB clone project
 
 ## Description
 
@@ -91,3 +91,8 @@ Delete the `BaseModel`instance:
 (hbnb) 
 ```
 ----------
+
+## Authors
+
+- Cédric Guerin
+- Nathan Raynal

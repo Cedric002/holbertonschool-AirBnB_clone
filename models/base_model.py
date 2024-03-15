@@ -54,3 +54,10 @@ class BaseModel:
         """
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, str(self.id), self.__dict__)
+
+    @classmethod
+    def all(cls):
+        """
+        Return a list of all instances of the class
+        """
+        return [obj for obj in storage.all().values() if isinstance(obj, cls)]
