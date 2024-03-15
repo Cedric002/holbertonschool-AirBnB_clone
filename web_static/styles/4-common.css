@@ -1,0 +1,13 @@
+body
+{
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container
+{
+    max-width: 1000px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+}
