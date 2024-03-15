@@ -6,9 +6,8 @@
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: right;
     align-items: center;
-    padding-right: 30px;
 }
 
 .filters button
@@ -18,12 +17,12 @@
     color: #FFFFFF;
     height: 48px;
     width: 20%;
+    margin-right: 30px;
     border: none;
     border-radius: 4px;
-    opacity: 0.9;
 }
 
 .filters button:hover
 {
-    opacity: 1;
+    opacity: 90%;
 }
